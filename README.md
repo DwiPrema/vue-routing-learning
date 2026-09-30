@@ -1,38 +1,51 @@
-# vue-routing-learning
+Berikut draf `README.md` yang disesuaikan secara khusus berdasarkan daftar materi modul/video yang ada pada gambar yang kamu kirim:
 
-This template should help get you started developing with Vue 3 in Vite.
+# 🚀 Vue Routing Learning
 
-## Recommended IDE Setup
+Repositori ini berisi catatan, contoh kode, dan dokumentasi hasil pembelajaran materi **Vue Router** di Vue 3.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## 📌 Materi Pembelajaran
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Berikut adalah poin-poin materi yang dipelajari dan diimplementasikan dalam proyek ini:
 
-## Customize configuration
+### 1. Defining the Routing Rules
+Mendefinisikan aturan navigasi pada aplikasi dengan menentukan pemetaan antara URL (*path*) dan komponen halaman (*views*).
+- Konfigurasi `createRouter` dan `createWebHistory`.
+- Menentukan daftar `routes` berisi `path`, `name`, dan `component`.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### 2. RouterView (`<RouterView />`)
+Komponen bawaan Vue Router yang berfungsi sebagai tempat (*placeholder*) untuk merender halaman/komponen sesuai dengan route yang sedang aktif.
 
-## Project Setup
+### 3. RouterLink (`<RouterLink />`)
+Komponen navigasi deklaratif pengganti tag HTML `<a>`.
+- Menggunakan atribut `to` untuk berpindah halaman tanpa memicu *full page reload* (SPA behavior).
+- Menggunakan `active-class` untuk styling link yang sedang aktif.
 
-```sh
-npm install
-```
+### 4. Dynamic Routing
+Menangani route dinamis yang menerima nilai parameter variabel pada URL (misalnya `/car/:id`).
+- Mengambil parameter route menggunakan `useRoute().params`.
+- Menampilkan data detail secara spesifik berdasarkan parameter ID yang diterima.
 
-### Compile and Hot-Reload for Development
+### 5. Programmatic Routing
+Navigasi antar halaman secara terprogram melalui JavaScript/logic code menggunakan `useRouter()`.
+- Menggunakan `router.push('/path')` atau `router.push({ name: 'RouteName' })`.
+- Navigasi berdasarkan aksi event, seperti klik tombol atau setelah proses form selesai.
 
-```sh
-npm run dev
-```
+### 6. Catch All Route (404 Not Found)
+Menangani URL tidak valid yang dimasukkan oleh pengguna menggunakan *wildcard pattern*.
+- Menerapkan route `path: '/:pathMatch(.*)*'`.
+- Mengarahkan pengguna ke komponen tampilan **404 Not Found / Page Not Found**.
 
-### Compile and Minify for Production
+### 7. Adding Query Params
+Mengirim dan membaca data tambahan pada URL melalui *query string* (misalnya `/cars?make=Toyota&sort=asc`).
+- Mengirim query via `router.push({ query: { make: 'Toyota' } })` atau `<RouterLink :to="{ query: { ... } }">`.
+- Membaca parameter query menggunakan `useRoute().query`.
 
-```sh
-npm run build
-```
+---
+
+## 🛠️ Modul Tambahan
+- **Nested Routes**: Pembagian tampilan layout induk (*parent*) dan anak (*child routes*) menggunakan `<RouterView />` bertingkat.
+
+---
