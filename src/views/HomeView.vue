@@ -1,18 +1,51 @@
 <script setup>
-import { ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import carsData from "../data.json";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter()
+const route = useRoute()
 
 const cars = ref(carsData)
+
+const filteredCars = ref(carsData)
+const selectedMake = ref("All")
+
+onMounted(() => {
+    selectedMake.value = route.query.make
+})
+
+const uniqueMakes = computed(() => {
+    return [...new Set(cars.value.map(car => car.make))]
+})
+
+watch(selectedMake, () => {
+    if(selectedMake.value) {
+        if(selectedMake.value === "All") return filteredCars.value = carsData;
+        else {
+            filteredCars.value = carsData.filter(c => c.make ===selectedMake.value)
+        }
+    }
+})
+
+const handleChange = () => {
+    router.push({
+        query: {
+            make: selectedMake.value
+        }
+    })
+}
 </script>
 
 <template>
     <main class="container">
         <h1>Our Cars</h1>
+        <select @change="handleChange" v-model="selectedMake">
+            <option value="All">All</option>
+            <option v-for="make in uniqueMakes" :value="make">{{ make }}</option>
+        </select>
         <div class="cards">
-            <div @click="router.push(`/car/${car.id}`)" v-for="car in cars" :key="car.id" class="card">
+            <div @click="router.push(`/car/${car.id}`)" v-for="car in filteredCars" :key="car.id" class="card">
                 <h1>{{ car.make }}</h1>
                 <p>${{ car.price }}</p>
             </div>
