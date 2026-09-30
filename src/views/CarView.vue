@@ -1,10 +1,11 @@
 <script setup>
 import { onBeforeMount, ref } from "vue";
-import { useRoute } from "vue-router"
+import { useRoute, RouterView, useRouter } from "vue-router"
 import cars from '../data.json'
 
 const car = ref(null)
 const route = useRoute()
+const router = useRouter()
 
 const { id } = route.params
 
@@ -21,6 +22,8 @@ onBeforeMount(() => {
             <p>Body: {{ car.body }}</p>
             <p>Price: {{ car.price }}</p>
             <p>Year: {{ car.year }}</p>
+            <RouterView />
+            <button @click="router.back()">Go Back</button>
         </div>
 
         <div v-else>
